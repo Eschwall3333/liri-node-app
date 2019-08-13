@@ -2,8 +2,8 @@ require("dotenv").config();
 var axios = require('axios');
 var keys = require("./keys");
 var Spotify = require('node-spotify-api');
-var spotify = new Spotify(keys.keys.spotify);
-var bands = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+var spotify = new Spotify(keys.spotify);
+//var bands = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
 var fs = require("fs");
 var request = require("request");
 var filename = './log.txt';
@@ -16,7 +16,6 @@ var userCommand = process.argv[2];
 var secondCommand = process.argv[3];
 
 
-console.log(keys.keys.spotify);
 var getSpotify = function (songName) {
     if (songName === undefined) {
         songName = "What's my age again";
@@ -25,7 +24,7 @@ var getSpotify = function (songName) {
     spotify.search(
         {
             type: "track",
-            query: userCommand
+            query: songName
         },
         function (err, data) {
             if (err) {
@@ -61,7 +60,7 @@ function mySwitch(userCommand) {
             getBands();
             break;
         case "spotify-this-song":
-            getSpotify();
+            getSpotify(secondCommand);
             break;
         case "movie-this":
             getMovie();
